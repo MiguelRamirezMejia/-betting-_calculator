@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Apuestas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Apuestas</h1>
+        <form id="bettingForm">
+            <div class="input-group">
+                <label for="initialBet">Apuesta Inicial:</label>
+                <input type="number" id="initialBet" placeholder="Ej. 100">
+            </div>
+            <div class="input-group">
+                <label for="odds">Valor de la Cuota:</label>
+                <input type="number" id="odds" placeholder="Ej. 1.5" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="numBets">Cantidad de Apuestas:</label>
+                <input type="number" id="numBets" placeholder="Ej. 10">
+            </div>
+            <button type="submit">Calcular</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th># Apuesta</th>
+                    <th>Valor Apuesta</th>
+                    <th>Ganancia Potencial</th>
+                    <th>Ganancia Total</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTable">
+                <!-- Los resultados se llenarán aquí con JavaScript -->
+            </tbody>
+        </table>
+<!-- Antes cierra el formulario de apuestas, agrega los siguientes inputs -->
+<div class="input-group">
+    <label for="totalGained">Total Ganado:</label>
+    <input type="text" id="totalGained" readonly>
+</div>
+<div class="input-group">
+    <label for="netGained">Ganancia Neta:</label>
+    <input type="text" id="netGained" readonly>
+</div>
+
+
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
