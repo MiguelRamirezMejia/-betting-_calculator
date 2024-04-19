@@ -8,6 +8,8 @@
 </head>
 <body>
     <div class="container">
+        <button id="toggleDarkMode">Modo Oscuro</button>
+
         <h1>Calculadora de Apuestas</h1>
         <form id="bettingForm">
             <div class="input-group">
@@ -29,8 +31,7 @@
                 <tr>
                     <th># Apuesta</th>
                     <th>Valor Apuesta</th>
-                    <th>Ganancia Potencial</th>
-                    <th>Ganancia Total</th>
+                    <th>Total acumulado Perdido</th>
                 </tr>
             </thead>
             <tbody id="resultsTable">
@@ -47,6 +48,17 @@
     <input type="text" id="netGained" readonly>
 </div>
  
+
+
+<div class="input-group">
+    <label for="currency">Moneda:</label>
+    <select id="currency">
+        <option value="COP">Peso Colombiano (COP)</option>
+        <option value="EUR">Euro (EUR)</option>
+        <option value="USD">Dólar (USD)</option>
+    </select>
+</div>
+
 
     </div>
     <script src="main.js"></script>

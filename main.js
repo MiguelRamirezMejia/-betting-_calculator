@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('bettingForm');
     const resultsTable = document.getElementById('resultsTable');
@@ -7,52 +6,64 @@ document.addEventListener('DOMContentLoaded', function() {
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        
+
         // Capturar valores
         let initialBet = parseFloat(document.getElementById('initialBet').value);
         const odds = parseFloat(document.getElementById('odds').value);
         const numBets = parseInt(document.getElementById('numBets').value);
         
         // Valores para almacenar totales
-        let totalGained = 0;
-        let totalStaked = 0;
-        
+        let totalLost = 0;
+        let currentBet = initialBet;
+
         // Limpiar resultados anteriores
         resultsTable.innerHTML = '';
         
-        // Bucle para calcular cada apuesta
+        // Bucle para calcular cada apuesta según el número de apuestas especificado
         for (let i = 0; i < numBets; i++) {
             let row = resultsTable.insertRow();
             let betNumberCell = row.insertCell(0);
             let betAmountCell = row.insertCell(1);
-            let potentialGainCell = row.insertCell(2);
-            let totalGainCell = row.insertCell(3);
+            let totalLostCell = row.insertCell(2);
             
             betNumberCell.textContent = i + 1;
-            betAmountCell.textContent = initialBet;
-            
-            // Calcular ganancia potencial
-            let potentialGain = initialBet * odds;
-            potentialGainCell.textContent = potentialGain.toFixed(2);
-            
-            // Suponiendo un ciclo de pérdida hasta ganar
-            if (Math.random() < 0.5) { // Supongamos 50% de probabilidad de ganar para simplificar
-                // Gana
-                totalGained += potentialGain;
-                totalStaked += initialBet;
-                totalGainCell.textContent = (totalGained - totalStaked).toFixed(2);
-                initialBet = 200; // Reiniciar a la apuesta inicial
-            } else {
-                // Pierde
-                totalStaked += initialBet;
-                totalGainCell.textContent = (totalGained - totalStaked).toFixed(2);
-                initialBet *= 2; // Duplicar la apuesta
-            }
+            betAmountCell.textContent = currentBet.toFixed(0);
+
+            // Suponiendo una pérdida para simplificar el cálculo
+            totalLost += currentBet;
+            totalLostCell.textContent = totalLost.toFixed(0);
+
+            // Duplica la apuesta para la siguiente ronda en caso de pérdida
+            currentBet *= 3;
         }
         
-        // Actualizar totales
-        totalGainedInput.value = totalGained.toFixed(2);
-        netGainedInput.value = (totalGained - totalStaked).toFixed(2);
+        // Calculamos el total ganado como la última apuesta multiplicada por las cuotas
+        let totalGained = currentBet / 3 * odds; // Dividimos por 2 porque currentBet ya se duplicó para la siguiente ronda
+        totalGainedInput.value = totalGained.toFixed(0);
+        netGainedInput.value = (totalGained - totalLost).toFixed(0);
     });
 });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggleDarkMode');
+    const body = document.body;
+    const elementsWithDarkMode = document.querySelectorAll('.container, input, button, th, .input-group label');
+
+    toggleButton.addEventListener('click', function() {
+        body.classList.toggle('dark-mode');
+        elementsWithDarkMode.forEach(el => {
+            el.classList.toggle('dark-mode');
+        });
+        
+        if (body.classList.contains('dark-mode')) {
+            toggleButton.textContent = 'Modo Claro';
+        } else {
+            toggleButton.textContent = 'Modo Oscuro';
+        }
+    });
+});
+
 
